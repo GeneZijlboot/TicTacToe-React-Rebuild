@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body{
+    @apply bg-[#308454] font-serif;
+}
+
+.Tabs{
+    @apply bg-[#2cbaba] rounded-[10px] cursor-pointer;
+}
+
+.Tabs:hover{
+    @apply bg-[#22d0d0];
+}
+
+.CenterMark{
+    @apply mb-[10px] text-center text-[90px];
+}
+
+.MadyBy{
+    @apply text-center text-[20px] text-[snow] p-[20px] no-underline cursor-pointer;
+}
