@@ -1,6 +1,8 @@
+import './index.css';
+
 function App(){
   return (
-    <p>testing</p>
+    <p className='text-[red]'>testing</p>
   )
 }
 
