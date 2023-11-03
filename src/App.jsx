@@ -30,6 +30,12 @@ function App(){
         return Button[a];
       }
     }
+
+    //Checks if there is a draw
+    if (Button.every((Button) => Button)) {
+      return setPlayerDisplay('Draw!'); 
+    }
+
     return null
   }
 
@@ -48,7 +54,7 @@ function App(){
     const winner = WinChecker(newBoard);
 
     if(winner){
-      console.log('we have a winner!');
+      PlayerSwap ? setPlayerDisplay('Player 2 wins!') : setPlayerDisplay('Player 1 wins!');
     }
   };
 
