@@ -6,11 +6,11 @@ body{
     @apply bg-[#308454] font-serif;
 }
 
-.Tabs{
+.Button{
     @apply bg-[#2cbaba] rounded-[10px] cursor-pointer h-[150px];
 }
 
-.Tabs:hover{
+.Button:hover{
     @apply bg-[#22d0d0];
 }
 

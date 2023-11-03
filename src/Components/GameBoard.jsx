@@ -4,7 +4,7 @@ function GameBoard({ board , HandleTabClick }){
     return (
         <div className="grid grid-cols-3 grid-rows-3  gap-[5px] p-[5px] rounded-[10px] bg-[snow]">
             {board.map((value, index) => (
-                <button key={index} className='Tabs' onClick={() => HandleTabClick(index)}>
+                <button key={index} className='Button' onClick={() => HandleTabClick(index)}>
                     <p className='CenterMark'>{value}</p>
                 </button>
             ))}
