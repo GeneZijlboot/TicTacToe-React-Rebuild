@@ -1,14 +1,12 @@
-import Button from "./Button";
 
-function GameBoard({ handleButtonClick , buttonData}){
+
+function GameBoard({ board , HandleTabClick }){
     return (
         <div className="grid grid-cols-3 grid-rows-3  gap-[5px] p-[5px] rounded-[10px] bg-[snow]">
-            {buttonData.map((button) => (
-                <Button
-                key={button.id}
-                mark={button.mark}
-                onClick={() => handleButtonClick(button.id)}
-                />
+            {board.map((value, index) => (
+                <button key={index} className='Tabs' onClick={() => HandleTabClick(index)}>
+                    <p className='CenterMark'>{value}</p>
+                </button>
             ))}
         </div>
     )
