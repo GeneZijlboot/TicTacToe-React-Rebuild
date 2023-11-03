@@ -7,7 +7,7 @@ body{
 }
 
 .Tabs{
-    @apply bg-[#2cbaba] rounded-[10px] cursor-pointer;
+    @apply bg-[#2cbaba] rounded-[10px] cursor-pointer h-[150px];
 }
 
 .Tabs:hover{
