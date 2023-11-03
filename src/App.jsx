@@ -19,13 +19,20 @@ function App(){
     setPlayerSwap(!PlayerSwap);
     setBoard(newBoard);
   };
-    
+
+  const Restart = () => {
+    const EmptyBoard = Array(9).fill(null);
+    setPlayerDisplay('Player 1, make your move.');
+    setPlayerSwap(false);
+    setBoard(EmptyBoard);
+  }
+
   return (
     <div className='grid grid-cols-3'>
       <div></div>
       <div>
         <Title />
-        <Score PlayerDisplay={PlayerDisplay} />
+        <Score PlayerDisplay={PlayerDisplay} Restart={Restart}/>
 
         {/* GameBoard */}
         <GameBoard board={board} HandleTabClick={HandleTabClick} />
