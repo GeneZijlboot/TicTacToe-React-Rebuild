@@ -1,7 +1,7 @@
-import Score from './Score';
-import Title from './Title';
-import GameBoard from './GameBoard';
-import Copyright from './Copyright';
+import Score from './Components/Score';
+import Title from './Components/Title';
+import GameBoard from './Components/GameBoard';
+import Copyright from './Components/Copyright';
 
 import './index.css';
 import { useState } from 'react';
@@ -9,10 +9,14 @@ import { useState } from 'react';
 function App(){
 
   const [board, setBoard] = useState(Array(9).fill(null));
+  const [PlayerSwap, setPlayerSwap] = useState(false);
+  const [PlayerDisplay, setPlayerDisplay] = useState('Player 1, make your move.')
 
   const HandleTabClick = (index) => {
     const newBoard = [...board];
-    newBoard[index] = 'X';
+    newBoard[index] = PlayerSwap ? 'O' : 'X'; 
+    PlayerSwap ? setPlayerDisplay('Player 1, make your move.') : setPlayerDisplay('Player 2, make your move.'); 
+    setPlayerSwap(!PlayerSwap);
     setBoard(newBoard);
   };
     
@@ -21,10 +25,10 @@ function App(){
       <div></div>
       <div>
         <Title />
-        <Score />
+        <Score PlayerDisplay={PlayerDisplay} />
 
         {/* GameBoard */}
-        <GameBoard board={board} HandleTabClick={HandleTabClick}/>
+        <GameBoard board={board} HandleTabClick={HandleTabClick} />
 
         <Copyright />
       </div>
