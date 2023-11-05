@@ -9,12 +9,12 @@ import { useState } from 'react';
 function App(){
 
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [PlayerSwap, setPlayerSwap] = useState(false);
-  const [PlayerDisplay, setPlayerDisplay] = useState('Player 1, make your move.');
+  const [playerSwap, setPlayerSwap] = useState(false);
+  const [currentPlayer, setCurrentPlayer] = useState('Player 1, make your move.')
   const [gameOver, setGameOver] = useState(false);
 
-  const WinChecker = (Button) => {
-    const WinConditions = [
+  const winChecker = (button) => {
+    const winConditions = [
       [0, 1, 2],
       [3, 4, 5],
       [6, 7, 8],
@@ -25,52 +25,52 @@ function App(){
       [0, 4, 8]
     ];
 
-    for(let i = 0; i < WinConditions.length; i++){
-      const [a, b, c] = WinConditions[i];
-      if(Button[a] && Button[a] === Button[b] && Button[a] === Button[c]){
-        return Button[a];
+    for(let i = 0; i <  winConditions.length; i++){
+      const [a, b, c] = winConditions[i];
+      if(button[a] && button[a] === button[b] && button[a] === button[c]){
+        return button[a];
       }
     }
 
     //Checks if there is a draw
-    if (Button.every((Button) => Button)) {
-      return setPlayerDisplay('Draw!'); 
+    if (button.every((button) => button)) {
+      return setCurrentPlayer('Draw!'); 
     }
 
     return null
   }
 
-  const HandleTabClick = (index) => {
+  const handleTabClick = (index) => {
     if (board[index] || gameOver) {
       return; //dsisabled button clicks if already marked or game over
     }
 
     const newBoard = [...board];
-    newBoard[index] = PlayerSwap ? 'O' : 'X';
+    newBoard[index] = playerSwap ? 'O' : 'X';
 
-    setPlayerSwap(!PlayerSwap);
+    setPlayerSwap(!playerSwap);
     setBoard(newBoard);
 
-    const winner = WinChecker(newBoard);
+    const winner = winChecker(newBoard);
 
     if (winner) {
       setGameOver(true); // Set game over status to true
-      PlayerSwap ? setPlayerDisplay('Player 2 wins!') : setPlayerDisplay('Player 1 wins!');
+      playerSwap ? setCurrentPlayer('Player 2 wins!') : setCurrentPlayer('Player 1 wins!');
     } else if (newBoard.every((Button) => Button)) {
       setGameOver(true); // Set game over status to true for a draw
-      setPlayerDisplay('Draw!');
+      setCurrentPlayer('Draw!');
     } else {
-      PlayerSwap
-        ? setPlayerDisplay('Player 1, make your move.')
-        : setPlayerDisplay('Player 2, make your move.');
+      playerSwap
+        ? setCurrentPlayer('Player 1, make your move.')
+        : setCurrentPlayer('Player 2, make your move.');
     }
   };
 
-  const Restart = () => {
-    const EmptyBoard = Array(9).fill(null);
-    setPlayerDisplay('Player 1, make your move.');
+  const restart = () => {
+    const emptyBoard = Array(9).fill(null);
+    setCurrentPlayer('Player 1, make your move.');
     setPlayerSwap(false);
-    setBoard(EmptyBoard);
+    setBoard(emptyBoard);
     setGameOver(false);
   }
 
@@ -79,8 +79,8 @@ function App(){
       <div></div>
       <div>
         <Title />
-        <Score PlayerDisplay={PlayerDisplay} Restart={Restart}/>
-        <GameBoard board={board} HandleTabClick={HandleTabClick} />
+        <Score currentPlayer={currentPlayer} restart={restart}/>
+        <GameBoard board={board} handleTabClick={handleTabClick} />
         <Copyright />
       </div>
       <div></div>
