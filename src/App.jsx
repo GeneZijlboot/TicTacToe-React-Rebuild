@@ -9,8 +9,7 @@ import { useState } from 'react';
 function App(){
 
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [currentPlayer, setCurrentPlayer] = useState('X');
-  const [playerDisplay, setPlayerDisplay] = useState('Player 1, make your move.');
+  const [currentPlayer, setCurrentPlayer] = useState('Player 1, make your move.');
   const [gameOver, setGameOver] = useState(false);
 
   const winChecker = (button) => {
@@ -32,11 +31,6 @@ function App(){
       }
     }
 
-    //Checks if there is a draw
-    if (button.every((button) => button)) {
-      return setPlayerDisplay('Draw!'); 
-    }
-
     return null
   }
 
@@ -46,34 +40,33 @@ function App(){
     }
 
     const newBoard = [...board];
-    if(currentPlayer === 'X'){
+    if(currentPlayer === 'Player 1, make your move.'){
       newBoard[index] = 'X';
-      setCurrentPlayer('O');
-    } else {
+      setCurrentPlayer('Player 2, make your move.');
+    } else if(currentPlayer === 'Player 2, make your move.'){
       newBoard[index] = 'O';
-      setCurrentPlayer('X');
+      setCurrentPlayer('Player 1, make your move.');
     }
     setBoard(newBoard);
 
     const winner = winChecker(newBoard);
 
     if (winner) {
-      setGameOver(true); // Set game over status to true
-      currentPlayer ? setPlayerDisplay('Player 2 wins!') : setPlayerDisplay('Player 1 wins!');
+      setGameOver(true); // Set game over status to true  
+      if(currentPlayer === 'Player 1, make your move.'){
+        setCurrentPlayer('Player 1 wins!');
+      } else if(currentPlayer === 'Player 2, make your move.'){
+        setCurrentPlayer('Player 2 wins!');
+      }
     } else if (newBoard.every((Button) => Button)) {
       setGameOver(true); // Set game over status to true for a draw
-      setPlayerDisplay('Draw!');
-    } else {
-      currentPlayer
-        ? setPlayerDisplay('Player 1, make your move.')
-        : setPlayerDisplay('Player 2, make your move.');
+      setCurrentPlayer('Draw!');
     }
   };
 
   const restart = () => {
     const emptyBoard = Array(9).fill(null);
-    setPlayerDisplay('Player 1, make your move.');
-    setCurrentPlayer(false);
+    setCurrentPlayer('Player 1, make your move.');
     setBoard(emptyBoard);
     setGameOver(false);
   }
@@ -83,7 +76,7 @@ function App(){
       <div></div>
       <div>
         <Title />
-        <Score playerDisplay={playerDisplay} restart={restart}/>
+        <Score currentPlayer={currentPlayer} restart={restart}/>
         <GameBoard board={board} handleTabClick={handleTabClick} />
         <Copyright />
       </div>
