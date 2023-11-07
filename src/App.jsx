@@ -9,7 +9,7 @@ import { useState } from 'react';
 function App(){
 
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [currentPlayer, setCurrentPlayer] = useState('Player 1, make your move.');
+  const [currentPlayer, setCurrentPlayer] = useState('X');
   const [gameOver, setGameOver] = useState(false);
 
   const winChecker = (button) => {
@@ -40,33 +40,36 @@ function App(){
     }
 
     const newBoard = [...board];
-    if(currentPlayer === 'Player 1, make your move.'){
+    if(currentPlayer === 'X'){
       newBoard[index] = 'X';
-      setCurrentPlayer('Player 2, make your move.');
-    } else if(currentPlayer === 'Player 2, make your move.'){
+      setCurrentPlayer('O');
+    } else if(currentPlayer === 'O'){
       newBoard[index] = 'O';
-      setCurrentPlayer('Player 1, make your move.');
+      setCurrentPlayer('X');
     }
     setBoard(newBoard);
 
     const winner = winChecker(newBoard);
+    const Wp1 = 'Player 1 wins!';
+    const Wp2 = 'Player 2 wins!';
+    const Draw = 'Draw';
 
     if (winner) {
       setGameOver(true); // Set game over status to true  
-      if(currentPlayer === 'Player 1, make your move.'){
-        setCurrentPlayer('Player 1 wins!');
-      } else if(currentPlayer === 'Player 2, make your move.'){
-        setCurrentPlayer('Player 2 wins!');
+      if(currentPlayer === 'X'){
+        setCurrentPlayer(Wp1);
+      } else if(currentPlayer === 'O'){
+        setCurrentPlayer(Wp2);
       }
     } else if (newBoard.every((Button) => Button)) {
       setGameOver(true); // Set game over status to true for a draw
-      setCurrentPlayer('Draw!');
+      setCurrentPlayer(Draw);
     }
   };
 
   const restart = () => {
     const emptyBoard = Array(9).fill(null);
-    setCurrentPlayer('Player 1, make your move.');
+    setCurrentPlayer('X');
     setBoard(emptyBoard);
     setGameOver(false);
   }
