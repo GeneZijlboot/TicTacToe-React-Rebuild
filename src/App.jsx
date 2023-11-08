@@ -12,6 +12,10 @@ function App(){
   const [currentPlayer, setCurrentPlayer] = useState('X');
   const [gameOver, setGameOver] = useState(false);
 
+  const [playerOneWin, setPlayerOneWin] = useState(false);
+  const [playerTwoWin, setPlayerTwoWin] = useState(false);
+  const [draw, setDraw] = useState(false);
+
   const winChecker = (button) => {
     const winConditions = [
       [0, 1, 2],
@@ -50,26 +54,26 @@ function App(){
     setBoard(newBoard);
 
     const winner = winChecker(newBoard);
-    const Wp1 = 'Player 1 wins!';
-    const Wp2 = 'Player 2 wins!';
-    const Draw = 'Draw';
 
     if (winner) {
       setGameOver(true); // Set game over status to true  
       if(currentPlayer === 'X'){
-        setCurrentPlayer(Wp1);
+        setPlayerOneWin(true);
       } else if(currentPlayer === 'O'){
-        setCurrentPlayer(Wp2);
+        setPlayerTwoWin(true);
       }
     } else if (newBoard.every((Button) => Button)) {
       setGameOver(true); // Set game over status to true for a draw
-      setCurrentPlayer(Draw);
+      setDraw(true);
     }
   };
 
   const restart = () => {
     const emptyBoard = Array(9).fill(null);
     setCurrentPlayer('X');
+    setPlayerOneWin(false);
+    setPlayerTwoWin(false);
+    setDraw(false);
     setBoard(emptyBoard);
     setGameOver(false);
   }
@@ -79,7 +83,7 @@ function App(){
       <div></div>
       <div>
         <Title />
-        <Score currentPlayer={currentPlayer} restart={restart}/>
+        <Score playerOneWin={playerOneWin} playerTwoWin={playerTwoWin} draw={draw} currentPlayer={currentPlayer} restart={restart}/>
         <GameBoard board={board} handleTabClick={handleTabClick} />
         <Copyright />
       </div>
