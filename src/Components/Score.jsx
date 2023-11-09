@@ -1,13 +1,18 @@
 function Score({ currentPlayer , restart , gameState}){
+
+    //displays whose turn it is, when their aint no winner yet
     let message = currentPlayer === 'X' ? 'Player 1, make your move.' : 'Player 2, make your move.';
     
-    if(gameState === true && currentPlayer === 'X'){
+    //checks for winner
+    if(gameState === true && !message.includes('make your move')){
+        console.log('draw');
+    } else if(gameState === true && currentPlayer === 'X'){
         message = 'Player 2 win!';
     } else if (gameState === true && currentPlayer === 'O'){
         message = 'Player 1 win!';
-    } else if (gameState === true){
-        message = 'draw';
     }
+    
+
 
     return (
         <div className="flex justify-evenly p-[10px]">
