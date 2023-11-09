@@ -10,8 +10,6 @@ function App(){
 
   const [board, setBoard] = useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState('X');
-  const [gameOver, setGameOver] = useState(false);
-
   const [gameState, setGameState] = useState(false);
 
   const winChecker = (button) => {
@@ -37,7 +35,7 @@ function App(){
   }
 
   const handleTabClick = (index) => {
-    if (board[index] || gameOver) {
+    if (board[index] || gameState) {
       return; //dsisabled button clicks if already marked or game over
     }
 
@@ -53,16 +51,14 @@ function App(){
 
     const winner = winChecker(newBoard);
 
-    if (winner) {
-      setGameOver(true); // Set game over status to true  
+    if (winner) { 
       if(currentPlayer === 'X'){
         setGameState(true);
       } else if(currentPlayer === 'O'){
         setGameState(true);
       }
     } else if (newBoard.every((Button) => Button)) {
-      setGameOver(true); // Set game over status to true for a draw
-      setGameState(true);
+      setGameState(true); // Set game over status to true for a draw
     }
   };
 
@@ -71,7 +67,7 @@ function App(){
     setCurrentPlayer('X');
     setGameState(false);
     setBoard(emptyBoard);
-    setGameOver(false);
+    setGameState(false);
   }
 
   return (
