@@ -1,15 +1,14 @@
-function Score({ currentPlayer , restart , playerOneWin , playerTwoWin , draw}){
+function Score({ currentPlayer , restart , gameState}){
     let message = currentPlayer === 'X' ? 'Player 1, make your move.' : 'Player 2, make your move.';
-    if(playerOneWin === true){
-        message = 'Player 1 win!';
-    }
-    if(playerTwoWin === true){
-        message = 'Player 2 win!';
-    }
-    if(draw === true){
-        message = 'Draw';
-    }
     
+    if(gameState === true && currentPlayer === 'X'){
+        message = 'Player 2 win!';
+    } else if (gameState === true && currentPlayer === 'O'){
+        message = 'Player 1 win!';
+    } else if (gameState === true){
+        message = 'draw';
+    }
+
     return (
         <div className="flex justify-evenly p-[10px]">
             <p className="text-[snow] p-[7px]">{ message }</p>
