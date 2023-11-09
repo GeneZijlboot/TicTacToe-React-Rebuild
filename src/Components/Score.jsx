@@ -4,15 +4,13 @@ function Score({ currentPlayer , restart , gameState}){
     let message = currentPlayer === 'X' ? 'Player 1, make your move.' : 'Player 2, make your move.';
     
     //checks for winner
-    if(gameState === true && !message.includes('make your move')){
-        console.log('draw');
+    if(gameState === true && currentPlayer === null){
+        message = 'Draw!';
     } else if(gameState === true && currentPlayer === 'X'){
         message = 'Player 2 win!';
     } else if (gameState === true && currentPlayer === 'O'){
         message = 'Player 1 win!';
     }
-    
-
 
     return (
         <div className="flex justify-evenly p-[10px]">

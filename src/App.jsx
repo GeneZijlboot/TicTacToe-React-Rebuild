@@ -59,6 +59,7 @@ function App(){
       }
     } else if (newBoard.every((Button) => Button)) {
         setGameState(true); // Set game over status to true for a draw
+        setCurrentPlayer(null);
     }
   };
 
