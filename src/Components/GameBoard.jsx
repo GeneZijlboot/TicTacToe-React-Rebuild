@@ -1,5 +1,3 @@
-
-
 function GameBoard({ board , handleTabClick }){
     return (
         <div className="grid grid-cols-3 grid-rows-3  gap-[5px] p-[5px] rounded-[10px] bg-[snow]">

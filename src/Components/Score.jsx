@@ -1,14 +1,14 @@
-function Score({ currentPlayer , restart , gameState}){
+function Score({ currentPlayer , restart , isFinished}){
 
     //displays whose turn it is, when their aint no winner yet
     let message = currentPlayer === 'X' ? 'Player 1, make your move.' : 'Player 2, make your move.';
     
     //checks for winner
-    if(gameState === true && currentPlayer === null){
+    if(isFinished === true && currentPlayer === null){
         message = 'Draw!';
-    } else if(gameState === true && currentPlayer === 'X'){
+    } else if(isFinished === true && currentPlayer === 'X'){
         message = 'Player 2 win!';
-    } else if (gameState === true && currentPlayer === 'O'){
+    } else if (isFinished === true && currentPlayer === 'O'){
         message = 'Player 1 win!';
     }
 
